@@ -1,0 +1,32 @@
+name: CD - Continuous Delivery
+
+on:
+  push:
+    branches:
+      - feature-projeto
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  delivery:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      - name: Preparar pacote para entrega
+        run: |
+          mkdir pacote
+          cp app.py pacote/
+          cp mensagens.py pacote/
+
+      - name: Gerar artefato de entrega
+        uses: actions/upload-artifact@v4
+        with:
+          name: projeto-python
+          path: pacote/
+
+      - name: CD concluido
+        run: echo "Continuous Delivery executado com sucesso!"
