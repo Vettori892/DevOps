@@ -21,6 +21,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Executar testes unitarios
+        run: python -m unittest test_mensagens.py
+
       - name: Verificar sintaxe dos arquivos Python
         run: |
           python -m py_compile app.py
